@@ -310,6 +310,12 @@ function exportToExcelLocal(rows) {
     const exportData = rows.map(row => ({
         'SKU / CÓDIGO': row.sku,
         'PRODUCTO': row.product,
+        'CANTIDAD': row.quantity,
+        'MODALIDAD': row.modality,
+        'OBSERVACIÓN': row.observation,
+        'AGENTE': row.agent,
+        'LOCALIDAD': row.location,
+        'PDV': row.pdv,
         'COSTO C/IVA UNIDAD': row.costoIvaUnidad || 0,
         'COSTO C/IVA BULTO': row.costoIvaBulto || 0,
         'DIST. c/IVA UNIDAD': row.distIvaUnidad || 0,
@@ -318,13 +324,7 @@ function exportToExcelLocal(rows) {
         'PDV c/IVA BULTO': row.pdvIvaBulto || 0,
         'PVP Sugerido BULTO': row.pvpSugeridoBulto || 0,
         'PVP Sugerido UNIDAD': row.pvpSugeridoUnidad || 0,
-        'CANTIDAD': row.quantity,
-        'SUBTOTAL': (row.pdvIvaUnidad || 0) * row.quantity,
-        'MODALIDAD': row.modality,
-        'OBSERVACIÓN': row.observation,
-        'AGENTE': row.agent,
-        'LOCALIDAD': row.location,
-        'PDV': row.pdv
+        'SUBTOTAL': (row.pdvIvaUnidad || 0) * row.quantity
     }));
 
     const ws = XLSX.utils.json_to_sheet(exportData);
@@ -399,6 +399,12 @@ function renderRow(rowData) {
         <td class="row-num">${rowIndex}</td>
         <td><input type="text" class="sku-input" value="${escapeHtml(rowData.sku)}" placeholder="SKU..." data-field="sku" autocomplete="off"></td>
         <td><div class="readonly-cell product-cell">${escapeHtml(rowData.product) || '-'}</div></td>
+        <td><input type="number" class="qty-input" value="${rowData.quantity}" min="1" data-field="quantity"></td>
+        <td><select data-field="modality">${MODALITY_OPTIONS.map(opt => `<option value="${opt}" ${rowData.modality === opt ? 'selected' : ''}>${opt || 'Seleccionar...'}</option>`).join('')}</select></td>
+        <td><input type="text" value="${escapeHtml(rowData.observation)}" placeholder="Obs..." data-field="observation"></td>
+        <td><input type="text" value="${escapeHtml(rowData.agent)}" placeholder="Agente..." data-field="agent"></td>
+        <td><input type="text" value="${escapeHtml(rowData.location)}" placeholder="Localidad..." data-field="location"></td>
+        <td><input type="text" value="${escapeHtml(rowData.pdv)}" placeholder="PDV..." data-field="pdv"></td>
         <td><div class="readonly-cell price-costo">${rowData.costoIvaUnidad ? formatPrice(rowData.costoIvaUnidad) : '-'}</div></td>
         <td><div class="readonly-cell price-costo">${rowData.costoIvaBulto ? formatPrice(rowData.costoIvaBulto) : '-'}</div></td>
         <td><div class="readonly-cell price-dist">${rowData.distIvaUnidad ? formatPrice(rowData.distIvaUnidad) : '-'}</div></td>
@@ -407,13 +413,7 @@ function renderRow(rowData) {
         <td><div class="readonly-cell price-pdv">${rowData.pdvIvaBulto ? formatPrice(rowData.pdvIvaBulto) : '-'}</div></td>
         <td><div class="readonly-cell price-pvp">${rowData.pvpSugeridoBulto ? formatPrice(rowData.pvpSugeridoBulto) : '-'}</div></td>
         <td><div class="readonly-cell price-pvp">${rowData.pvpSugeridoUnidad ? formatPrice(rowData.pvpSugeridoUnidad) : '-'}</div></td>
-        <td><input type="number" class="qty-input" value="${rowData.quantity}" min="1" data-field="quantity"></td>
         <td><div class="readonly-cell subtotal-cell">${formatPrice(rowData.pdvIvaUnidad * rowData.quantity)}</div></td>
-        <td><select data-field="modality">${MODALITY_OPTIONS.map(opt => `<option value="${opt}" ${rowData.modality === opt ? 'selected' : ''}>${opt || 'Seleccionar...'}</option>`).join('')}</select></td>
-        <td><input type="text" value="${escapeHtml(rowData.observation)}" placeholder="Obs..." data-field="observation"></td>
-        <td><input type="text" value="${escapeHtml(rowData.agent)}" placeholder="Agente..." data-field="agent"></td>
-        <td><input type="text" value="${escapeHtml(rowData.location)}" placeholder="Localidad..." data-field="location"></td>
-        <td><input type="text" value="${escapeHtml(rowData.pdv)}" placeholder="PDV..." data-field="pdv"></td>
         <td><div class="action-cell"><button class="btn-duplicate-row" title="Duplicar">📋</button><button class="btn-delete-row" title="Eliminar">🗑️</button></div></td>
     `;
 

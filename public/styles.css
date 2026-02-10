@@ -257,16 +257,16 @@ body::before {
 
 /* Column Widths */
 .col-num { width: 40px; }
-.col-sku { width: 110px; }
-.col-product { width: 180px; }
-.col-price { width: 95px; }
-.col-qty { width: 70px; }
-.col-subtotal { width: 90px; }
-.col-modality { width: 100px; }
-.col-obs { width: 120px; }
-.col-agent { width: 100px; }
-.col-location { width: 100px; }
-.col-pdv { width: 110px; }
+.col-sku { width: 120px; }
+.col-product { width: 200px; }
+.col-qty { width: 80px; }
+.col-subtotal { width: 100px; }
+.col-modality { width: 110px; }
+.col-obs { width: 130px; }
+.col-agent { width: 110px; }
+.col-location { width: 110px; }
+.col-pdv-name { width: 120px; }
+.col-price { width: 100px; }
 .col-actions { width: 80px; }
 
 /* Table Header */
