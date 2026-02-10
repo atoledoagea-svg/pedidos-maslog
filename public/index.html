@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido MasLog - Gestión de Pedidos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <span class="logo-icon">📦</span>
+                <h1>PedidoMasLog</h1>
+            </div>
+            <div class="header-actions">
+                <label class="file-upload-btn" for="excel-upload">
+                    <span class="btn-icon">📂</span>
+                    Cargar Catálogo
+                </label>
+                <input type="file" id="excel-upload" accept=".xlsx,.xls" hidden>
+                <button class="btn-export" id="export-btn">
+                    <span class="btn-icon">💾</span>
+                    Exportar Pedido
+                </button>
+                <button class="btn-clear" id="clear-btn">
+                    <span class="btn-icon">🗑️</span>
+                    Limpiar
+                </button>
+            </div>
+        </header>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-item catalog-status">
+                <span class="status-dot" id="catalog-dot"></span>
+                <span id="catalog-status-text">Sin catálogo cargado</span>
+            </div>
+            <div class="status-item">
+                <span>Productos en pedido: </span>
+                <strong id="row-count">0</strong>
+            </div>
+            <div class="status-item">
+                <span>Total estimado: </span>
+                <strong id="total-amount">$0.00</strong>
+            </div>
+        </div>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Spreadsheet Container -->
+            <div class="spreadsheet-container">
+                <table class="spreadsheet" id="spreadsheet">
+                    <thead>
+                        <tr>
+                            <th class="col-num">#</th>
+                            <th class="col-sku">SKU / CÓDIGO</th>
+                            <th class="col-product">PRODUCTO</th>
+                            <th class="col-price">COSTO c/IVA UNIDAD</th>
+                            <th class="col-price">COSTO c/IVA BULTO</th>
+                            <th class="col-price">DIST. c/IVA UNIDAD</th>
+                            <th class="col-price">DIST. c/IVA BULTO</th>
+                            <th class="col-price">PDV c/IVA UNIDAD</th>
+                            <th class="col-price">PDV c/IVA BULTO</th>
+                            <th class="col-price">PVP Sug. BULTO</th>
+                            <th class="col-price">PVP Sug. UNIDAD</th>
+                            <th class="col-qty">CANTIDAD</th>
+                            <th class="col-subtotal">SUBTOTAL</th>
+                            <th class="col-modality">MODALIDAD</th>
+                            <th class="col-obs">OBSERVACIÓN</th>
+                            <th class="col-agent">AGENTE</th>
+                            <th class="col-location">LOCALIDAD</th>
+                            <th class="col-pdv">PDV</th>
+                            <th class="col-actions">ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="spreadsheet-body">
+                        <!-- Rows will be added dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Add Row Button -->
+            <button class="add-row-btn" id="add-row-btn">
+                <span>+</span> Agregar Fila
+            </button>
+        </main>
+
+        <!-- SKU Autocomplete Dropdown -->
+        <div class="autocomplete-dropdown" id="autocomplete-dropdown">
+            <!-- Suggestions will appear here -->
+        </div>
+
+        <!-- Toast Notifications -->
+        <div class="toast-container" id="toast-container"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
