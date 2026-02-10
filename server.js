@@ -378,10 +378,11 @@ app.use((error, req, res, next) => {
 });
 
 // ==========================================
-// Iniciar servidor
+// Iniciar servidor (solo en desarrollo local)
 // ==========================================
-app.listen(PORT, () => {
-    console.log(`
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`
 ╔════════════════════════════════════════════════╗
 ║                                                ║
 ║   📦 PedidoMasLog Server                       ║
@@ -398,6 +399,10 @@ app.listen(PORT, () => {
 ║   • DELETE /api/catalog                        ║
 ║                                                ║
 ╚════════════════════════════════════════════════╝
-    `);
-});
+        `);
+    });
+}
+
+// Exportar para Vercel
+module.exports = app;
 

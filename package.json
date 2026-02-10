@@ -5,7 +5,11 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "vercel-build": "echo 'Build complete'"
+  },
+  "engines": {
+    "node": "18.x"
   },
   "keywords": ["pedidos", "excel", "spreadsheet"],
   "author": "",
